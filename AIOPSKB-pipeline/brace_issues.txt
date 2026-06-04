@@ -1,0 +1,22 @@
+Found 10 unescaped brace patterns in f-string:
+
+  {c.get('severity', '')}
+    in: f"   - [{c.get('severity', '')}][{c.get('dimension', '')}] {c.get('fault_name', 
+  {c.get('dimension', '')}
+    in: f"   - [{c.get('severity', '')}][{c.get('dimension', '')}] {c.get('fault_name', 
+  {c.get('fault_name', '')}
+    in: f"   - [{c.get('severity', '')}][{c.get('dimension', '')}] {c.get('fault_name', 
+  {c.get('issue', '')}
+    in: f"   - [{c.get('severity', '')}][{c.get('dimension', '')}] {c.get('fault_name', 
+  {'、'.join(children)}
+    in: parent_note = f"\n12. 该部件包含子部件（{'、'.join(children)}），请聚焦于该部件整体层面的故障模式（整体退化、系统级失效
+  {类型标签}
+    in: 参数完整格式：{类型标签}{参数名}{阈值}（适用：{工况条件}，置信：{置信等级}）
+  {参数名}
+    in: 参数完整格式：{类型标签}{参数名}{阈值}（适用：{工况条件}，置信：{置信等级}）
+  {阈值}
+    in: 参数完整格式：{类型标签}{参数名}{阈值}（适用：{工况条件}，置信：{置信等级}）
+  {工况条件}
+    in: 参数完整格式：{类型标签}{参数名}{阈值}（适用：{工况条件}，置信：{置信等级}）
+  {置信等级}
+    in: 参数完整格式：{类型标签}{参数名}{阈值}（适用：{工况条件}，置信：{置信等级}）

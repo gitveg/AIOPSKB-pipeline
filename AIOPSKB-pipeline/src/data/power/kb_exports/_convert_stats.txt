@@ -1,0 +1,8 @@
+
+── 转化统计 ──
+  sub_industries: 10
+  equipment: 72
+  sub_equipment: 51
+  components: 205
+  faults: 73
+  faults_with_details: 73

@@ -1,0 +1,4 @@
+openai>=1.30.0
+google-generativeai>=0.7.0
+python-dotenv>=1.0.0
+rich>=13.0.0

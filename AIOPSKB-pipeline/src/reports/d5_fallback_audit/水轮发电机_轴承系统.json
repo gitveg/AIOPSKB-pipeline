@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-05-28T21:46:54.333831",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "水电",
+    "equipment": "水轮发电机",
+    "component": "轴承系统"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

@@ -1,0 +1,5 @@
+openai>=1.30.0
+google-generativeai>=0.7.0
+zhipuai>=2.0.0
+pyyaml>=6.0
+rich>=13.0.0

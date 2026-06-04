@@ -1,0 +1,60 @@
+PV故障知识 D5置信标注扫描结果
+================================================================================
+
+[光伏组件] EVA封装胶膜: 9/9 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 光伏组件: 16/16 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 太阳能电池（晶硅）: 12/12 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 接线盒: 10/10 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 旁路二极管: 9/9 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 背板: 10/10 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 钢化玻璃: 7/7 labelled, 0 unlabelled  [CLEAN]
+[光伏组件] 铝合金边框: 9/9 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] IGBT模块: 11/11 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 主控板: 17/17 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 交流接触器: 12/14 labelled, 2 unlabelled  [2/14 MISSING]
+  故障=主触头熔焊 | L4: [状态量]主触头接触压降≈0V（几乎零电压，等效电阻<0.5Ω，易于检测）；
+  故障=机械卡涩/铁芯剩磁 | L6: [电气]线圈励磁电流异常（未完全吸合时大于正常吸持电流），无统一阈值；
+
+[光伏逆变器] 交流滤波电容: 3/3 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 交直流保护器件: 15/15 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 光伏逆变器: 13/13 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 功率变换单元: 11/11 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 外壳组件: 6/6 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 密封条: 6/6 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 控制与驱动单元: 10/11 labelled, 1 unlabelled  [1/11 MISSING]
+  故障=继电吸收电路失效导致触点粘连 | L8: [状态量]继电器动作次数超过机械寿命80%（经验值）
+
+[光伏逆变器] 散热器: 10/10 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 散热系统: 9/9 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 散热风扇: 9/9 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 显示与通讯模块: 7/7 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 滤网: 4/4 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 直流断路器: 12/12 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 直流母线电容: 5/5 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 直流熔断器: 12/12 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 纳米晶共模磁芯: 8/8 labelled, 0 unlabelled  [CLEAN]
+[光伏逆变器] 防雷器: 10/10 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] Bay-O-Net熔断器: 10/10 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 低压套管: 12/12 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 低压绕组: 7/7 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 低压配电单元: 11/11 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 分接开关: 16/16 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 变压器主体: 17/17 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 底座: 5/5 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 油位计: 5/5 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 箱体: 10/10 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 箱门密封条: 4/4 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 通风过滤网: 2/2 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 铁芯: 2/2 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 限流熔断器: 10/10 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 高压套管: 15/15 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 高压开关柜: 11/11 labelled, 0 unlabelled  [CLEAN]
+[箱式变压器] 高压配电单元: 10/10 labelled, 0 unlabelled  [CLEAN]
+
+================================================================================
+SUMMARY: 44 files | 422 params | 419 labelled (99.3%) | 3 unlabelled (0.7%)
+Clean files: 42 | Files with issues: 2
+
+Files to rerun (2):
+  光伏逆变器\faults\交流接触器.md
+  光伏逆变器\faults\控制与驱动单元.md

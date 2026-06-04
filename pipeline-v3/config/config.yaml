@@ -1,0 +1,26 @@
+# AIOps Pipeline — API Key Configuration
+# ============================================================
+# 请在下方填写你的 API Key。
+# 如果你暂时没有某个 Key，可以留空，对应的 Agent 将无法调用。
+# 建议至少提供 3 个 Key 以保证 Pipeline 正常运行。
+
+# ── OpenAI (ChatGPT) ──────────────────────────────────────
+# 用于：专家 A（算法架构师）、专家 D（仲裁/QA）
+# 获取地址：https://platform.openai.com/api-keys
+openai_api_key: "sk-xxxxxxxxxxxxxxxxxxxxxxxx"
+
+# ── DeepSeek ──────────────────────────────────────────────
+# 用于：专家 B（SRE/工具链）
+# 获取地址：https://platform.deepseek.com/api_keys
+deepseek_api_key: "sk-061e03c70f63402bb363bcd2960622d2"
+deepseek_base_url: "https://api.deepseek.com/v1"
+
+# ── Google Gemini ─────────────────────────────────────────
+# 用于：主控 LLM（总架构师）
+# 获取地址：https://aistudio.google.com/apikey
+gemini_api_key: "AIzaxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# ── 智谱 GLM ──────────────────────────────────────────────
+# 用于：专家 C（技术价值分析）
+# 获取地址：https://open.bigmodel.cn/usercenter/apikeys
+zhipu_api_key: "xxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxx"

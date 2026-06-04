@@ -1,0 +1,37 @@
+# AIOps Pipeline — Model Assignment Configuration
+# ============================================================
+# 定义每个 Agent 角色使用的模型。
+# 格式：provider + model
+# provider 可选值：openai / deepseek / gemini / zhipu
+# 建议不要重复使用同一模型以增加视角多样性。
+
+agents:
+  # 主控 LLM：贯穿阶段 1/3/4/5，负责生成和收敛
+  # 推荐使用 Gemini，长上下文窗口适合大型文档生成
+  orchestrator:
+    provider: "gemini"
+    model: "gemini-2.5-pro"
+
+  # 专家 A：算法架构师，技术前瞻性与科学严谨性
+  # 推荐使用 ChatGPT，技术文献理解与前沿感知强
+  expert_a:
+    provider: "openai"
+    model: "gpt-4o"
+
+  # 专家 B：SRE/工具链专家，工程落地可行性
+  # 推荐使用 DeepSeek，工程代码理解准确，性价比高
+  expert_b:
+    provider: "deepseek"
+    model: "deepseek-chat"
+
+  # 专家 C：技术价值分析专家，优先级与 ROI
+  # 推荐使用 GLM-5.1，结构化分析与成本推理
+  expert_c:
+    provider: "zhipu"
+    model: "glm-5.1"
+
+  # 专家 D：仲裁与 QA，逻辑一致性与质量控制
+  # 推荐使用 ChatGPT，逻辑推理与冲突仲裁需要最强推理能力
+  expert_d:
+    provider: "openai"
+    model: "gpt-4o"

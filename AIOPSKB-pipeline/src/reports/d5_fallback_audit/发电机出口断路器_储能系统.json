@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-05-28T08:19:06.587327",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "火电",
+    "equipment": "发电机出口断路器",
+    "component": "储能系统"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

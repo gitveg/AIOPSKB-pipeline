@@ -1,0 +1,241 @@
+Scanning 751 fault files...
+
+======================================================================
+CLEAN:  531
+ISSUES: 222
+======================================================================
+
+--- TYPE 1: SEARCH_UNAVAILABLE (4) ---
+  data\power\hydro\main_transformer\faults\净油器.md | SEARCH_UNAVAILABLE: line 2
+  data\power\hydro\发电机断路器\faults\主接线端子.md | SEARCH_UNAVAILABLE: line 2
+  data\power\hydro\水轮发电机\faults\冷却水管.md | SEARCH_UNAVAILABLE: line 2
+  data\power\thermal\steam_turbine\faults\喷嘴／静叶栅.md | SEARCH_UNAVAILABLE: line 3
+
+--- TYPE 2: DUPLICATE_HEADER (117) ---
+  data\power\hydro\hydro_turbine\faults\伸缩节.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\hydro_turbine\faults\反喷嘴／制动喷嘴.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\hydro_turbine\faults\导叶密封件.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\hydro_turbine\faults\接力器活塞环／密封.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\hydro_turbine\faults\止漏环.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\hydro_turbine\faults\进水阀.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\hydro_turbine\faults\顶盖.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\main_transformer\faults\储油柜胶囊／隔膜.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\main_transformer\faults\冷却风扇.md | DUPLICATE_HEADER: lines [1, 11]
+  data\power\hydro\main_transformer\faults\密封件.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\main_transformer\faults\操作机构.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\main_transformer\faults\油泵.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\main_transformer\faults\电动操动机构.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\main_transformer\faults\高压绕组.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\中性点接地装置\faults\分接开关.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\中性点接地装置\faults\温度传感器.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\中性点接地装置\faults\电流互感器.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\主变线路保护测控屏\faults\CPU板.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\主变线路保护测控屏\faults\交换机.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\主变线路保护测控屏\faults\电源板.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\主变线路保护测控屏\faults\端子排.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\主变线路保护测控屏\faults\跳闸保持继电器.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\hydro\交直流电源系统\faults\接地检测电阻.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\交直流电源系统\faults\散热风扇.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\交直流电源系统\faults\汇流铜排.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\交直流电源系统\faults\电池巡检模块.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\交直流电源系统\faults\输出滤波电容.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\hydro\交直流电源系统\faults\防雷器（SPD）.md | DUPLICATE_HEADER: lines [1, 11]
+  data\power\hydro\低压开关柜\faults\一次接插件.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\低压开关柜\faults\手车位置行程开关.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\低压开关柜\faults\控制端子排.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\低压开关柜\faults\智能操控装置.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\低压开关柜\faults\梅花触头.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\低压开关柜\faults\通风滤网.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\低压开关柜\faults\零序电流互感器.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\厂用电系统\faults\UPS蓄电池组.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\厂用电系统\faults\二次插接件.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\厂用电系统\faults\低压绕组.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\厂用电系统\faults\呼吸器.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\厂用电系统\faults\塑壳断路器（MCCB）.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\厂用电系统\faults\备自投装置.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\厂用电系统\faults\操动机构.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\厂用电系统\faults\散热器风扇电机.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\厂用电系统\faults\母线支撑绝缘子.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\厂用电系统\faults\熔断器.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\厂用电系统\faults\绝缘监测装置.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\厂用电系统\faults\蓄电池组.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\厂用电系统\faults\高压绕组.md | DUPLICATE_HEADER: lines [1, 11]
+  data\power\hydro\压缩空气系统(气系统)\faults\安全阀.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\压缩空气系统(气系统)\faults\精滤芯.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\压缩空气系统(气系统)\faults\螺杆转子.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\发电机保护测控屏\faults\总线背板.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\发电机保护测控屏\faults\柜门行程开关.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\发电机保护测控屏\faults\液晶面板.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\发电机保护测控屏\faults\电源监视继电器.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\发电机断路器\faults\合闸电阻.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\发电机断路器\faults\吸附剂.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\发电机断路器\faults\触头系统.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\hydro\发电机断路器\faults\计数器.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\发电机断路器\faults\防爆膜.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\安全稳定控制装置\faults\信号继电器.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\安全稳定控制装置\faults\液晶显示屏背光灯管.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\安全稳定控制装置\faults\跳闸保持线圈.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\技术供水系统\faults\主回路接触器.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\技术供水系统\faults\换热管束.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\技术供水系统\faults\泵轴.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\技术供水系统\faults\补水泵机械密封.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\接地系统\faults\接地支线.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\hydro\接地系统\faults\水平接地带.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\接地系统\faults\自然接地体.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\交采表.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\数字量输出模块.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\测速探头.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\直流开关.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\继电器底座.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\过滤网.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\通信模块.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\防雷器.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\伸缩节.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\微粒陷阱.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\接地触头.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\hydro\水泵水轮机\faults\上冠.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\水泵水轮机\faults\叶片.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\水泵水轮机\faults\导叶端面密封.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\水泵水轮机\faults\座环固定导叶.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\水电站综合自动化监控系统\faults\CPU模块.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\水电站综合自动化监控系统\faults\交直流采样装置.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\水电站综合自动化监控系统\faults\同步时钟对时装置.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\水电站综合自动化监控系统\faults\直流绝缘监测装置.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\水电站综合自动化监控系统\faults\通信管理机.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\水轮发电机\faults\冷却水管.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\水轮发电机\faults\导轴瓦.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\水轮发电机\faults\磁极线圈.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\水轮发电机\faults\空气过滤器.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\水轮发电机\faults\镜板.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\测温制动屏\faults\散热风扇.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\离相封闭母线\faults\外壳伸缩节.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\离相封闭母线\faults\外壳筒体.md | DUPLICATE_HEADER: lines [1, 10]
+  data\power\hydro\离相封闭母线\faults\密封圈／密封垫.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\离相封闭母线\faults\电流互感器.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\调速系统\faults\LVDT线圈.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\调速系统\faults\O型密封圈.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\调速系统\faults\内置滤网.md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\调速系统\faults\快速卸荷阀.md | DUPLICATE_HEADER: lines [1, 6]
+  data\power\hydro\调速系统\faults\油箱.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\调速系统\faults\测速探头.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\hydro\调速系统\faults\联轴器.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\hydro\调速系统\faults\试验滑阀.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\调速系统\faults\飞锤.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\hydro\远动通信设备\faults\后备电池.md | DUPLICATE_HEADER: lines [1, 3]
+  data\power\hydro\远动通信设备\faults\液晶显示模块(LCD).md | DUPLICATE_HEADER: lines [1, 4]
+  data\power\hydro\高压电力电缆 _ 气体绝缘金属封闭输电线路(GIL)\faults\三相导体单元.md | DUPLICATE_HEADER: lines [1, 9]
+  data\power\wind\风电机组\faults\发电机编码器.md | DUPLICATE_HEADER: lines [1, 8]
+  data\power\wind\风电机组\faults\变桨齿轮箱.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\wind\风电机组\faults\安全链继电器.md | DUPLICATE_HEADER: lines [1, 7]
+  data\power\wind\风电机组\faults\滑环装置.md | DUPLICATE_HEADER: lines [1, 5]
+  data\power\wind\风电机组\faults\滤清器滤芯.md | DUPLICATE_HEADER: lines [1, 3]
+
+--- TYPE 3: NO_VALID_DATA (101) ---
+  data\power\hydro\hydro_turbine\faults\喷嘴口.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\导叶限位装置.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\底环.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\折向器.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\真空破坏阀.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\轴瓦.md | NO_VALID_DATA
+  data\power\hydro\hydro_turbine\faults\进人门.md | NO_VALID_DATA
+  data\power\hydro\main_transformer\faults\净油器.md | NO_VALID_DATA
+  data\power\hydro\main_transformer\faults\导电杆.md | NO_VALID_DATA
+  data\power\hydro\main_transformer\faults\开关本体.md | NO_VALID_DATA
+  data\power\hydro\main_transformer\faults\放气塞.md | NO_VALID_DATA
+  data\power\hydro\中性点接地装置\faults\中性点避雷器.md | NO_VALID_DATA
+  data\power\hydro\中性点接地装置\faults\电压互感器.md | NO_VALID_DATA
+  data\power\hydro\中性点接地装置\faults\铁芯.md | NO_VALID_DATA
+  data\power\hydro\中性点接地装置\faults\阻尼电阻.md | NO_VALID_DATA
+  data\power\hydro\主变线路保护测控屏\faults\通信板.md | NO_VALID_DATA
+  data\power\hydro\交直流电源系统\faults\交流防雷熔断器.md | NO_VALID_DATA
+  data\power\hydro\交直流电源系统\faults\电池连接条.md | NO_VALID_DATA
+  data\power\hydro\交直流电源系统\faults\蓄电池单体.md | NO_VALID_DATA
+  data\power\hydro\交直流电源系统\faults\输出滤波电感.md | NO_VALID_DATA
+  data\power\hydro\交直流电源系统\faults\通信接口板.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\二次接插件.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\冷却风扇.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\小型中间继电器.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\母线连接搭接头.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\活门机构.md | NO_VALID_DATA
+  data\power\hydro\低压开关柜\faults\电缆室绝缘隔板.md | NO_VALID_DATA
+  data\power\hydro\公用LCU屏\faults\切换把手.md | NO_VALID_DATA
+  data\power\hydro\公用LCU屏\faults\指示灯.md | NO_VALID_DATA
+  data\power\hydro\公用LCU屏\faults\接地铜排.md | NO_VALID_DATA
+  data\power\hydro\公用LCU屏\faults\通信接口插件.md | NO_VALID_DATA
+  data\power\hydro\公用LCU屏\faults\防尘滤网.md | NO_VALID_DATA
+  data\power\hydro\厂用电系统\faults\冷却风机.md | NO_VALID_DATA
+  data\power\hydro\厂用电系统\faults\微型断路器（MCB）.md | NO_VALID_DATA
+  data\power\hydro\厂用电系统\faults\绝缘垫块.md | NO_VALID_DATA
+  data\power\hydro\压缩空气系统(气系统)\faults\压力表.md | NO_VALID_DATA
+  data\power\hydro\压缩空气系统(气系统)\faults\疏水阀.md | NO_VALID_DATA
+  data\power\hydro\压缩空气系统(气系统)\faults\粗滤芯.md | NO_VALID_DATA
+  data\power\hydro\发电机保护测控屏\faults\跳位／合位监视继电器.md | NO_VALID_DATA
+  data\power\hydro\发电机保护测控屏\faults\远方／就地切换把手.md | NO_VALID_DATA
+  data\power\hydro\发电机保护测控屏\faults\重合闸投退压板.md | NO_VALID_DATA
+  data\power\hydro\发电机断路器\faults\主接线端子.md | NO_VALID_DATA
+  data\power\hydro\发电机断路器\faults\极限开关.md | NO_VALID_DATA
+  data\power\hydro\发电机断路器\faults\滤网.md | NO_VALID_DATA
+  data\power\hydro\发电机断路器\faults\蓄压器.md | NO_VALID_DATA
+  data\power\hydro\发电机断路器\faults\软连接.md | NO_VALID_DATA
+  data\power\hydro\安全稳定控制装置\faults\主处理器模件.md | NO_VALID_DATA
+  data\power\hydro\安全稳定控制装置\faults\交流采样插件.md | NO_VALID_DATA
+  data\power\hydro\安全稳定控制装置\faults\出口压板.md | NO_VALID_DATA
+  data\power\hydro\安全稳定控制装置\faults\背板总线模件.md | NO_VALID_DATA
+  data\power\hydro\技术供水系统\faults\压力表／传感器.md | NO_VALID_DATA
+  data\power\hydro\技术供水系统\faults\流量开关／传感器.md | NO_VALID_DATA
+  data\power\hydro\技术供水系统\faults\电机绕组绝缘.md | NO_VALID_DATA
+  data\power\hydro\技术供水系统\faults\管板与密封垫.md | NO_VALID_DATA
+  data\power\hydro\接地系统\faults\接地断开点／测试卡子.md | NO_VALID_DATA
+  data\power\hydro\接地系统\faults\降阻模块／降阻剂.md | NO_VALID_DATA
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\标记条.md | NO_VALID_DATA
+  data\power\hydro\机组LCU屏(现地控制单元)\faults\电源模块.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\二次绕组.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\动触头组件.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\压力释放装置（防爆膜）.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\复合绝缘外套.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\屏蔽罩.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\操作机构.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\电压互感器.md | NO_VALID_DATA
+  data\power\hydro\气体绝缘金属封闭开关设备(GIS)\faults\绝缘拉杆.md | NO_VALID_DATA
+  data\power\hydro\水泵水轮机\faults\下环.md | NO_VALID_DATA
+  data\power\hydro\水泵水轮机\faults\导叶轴套.md | NO_VALID_DATA
+  data\power\hydro\水泵水轮机\faults\控制环.md | NO_VALID_DATA
+  data\power\hydro\水泵水轮机\faults\水导轴承.md | NO_VALID_DATA
+  data\power\hydro\水泵水轮机\faults\蜗壳进人门.md | NO_VALID_DATA
+  data\power\hydro\水电站综合自动化监控系统\faults\I／O采集模块.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\密封盖.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\弹性支撑件.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\挡油管.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\碳刷.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\绝缘垫片.md | NO_VALID_DATA
+  data\power\hydro\水轮发电机\faults\转子引线.md | NO_VALID_DATA
+  data\power\hydro\测温制动屏\faults\制动逻辑控制器.md | NO_VALID_DATA
+  data\power\hydro\测温制动屏\faults\报警输出继电器.md | NO_VALID_DATA
+  data\power\hydro\测温制动屏\faults\操作按钮／指示灯.md | NO_VALID_DATA
+  data\power\hydro\测温制动屏\faults\电源防雷器.md | NO_VALID_DATA
+  data\power\hydro\测温制动屏\faults\通信接口板.md | NO_VALID_DATA
+  data\power\hydro\离相封闭母线\faults\外壳波纹管.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\喷嘴挡板副.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\复位装置.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\密封组件.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\滑阀阀芯套.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\铰接轴承.md | NO_VALID_DATA
+  data\power\hydro\调速系统\faults\阀杆.md | NO_VALID_DATA
+  data\power\hydro\远动通信设备\faults\以太网PHY与变压器.md | NO_VALID_DATA
+  data\power\hydro\远动通信设备\faults\电源开关.md | NO_VALID_DATA
+  data\power\hydro\高压电力电缆 _ 气体绝缘金属封闭输电线路(GIL)\faults\密封圈／O型圈.md | NO_VALID_DATA
+  data\power\thermal\excitation_system\faults\可控硅跨接器.md | NO_VALID_DATA
+  data\power\thermal\excitation_system\faults\磁场断路器.md | NO_VALID_DATA
+  data\power\thermal\excitation_system\faults\非线性电阻.md | NO_VALID_DATA
+  data\power\thermal\steam_turbine\faults\危急保安器.md | NO_VALID_DATA
+  data\power\thermal\steam_turbine\faults\喷嘴室.md | NO_VALID_DATA
+  data\power\thermal\steam_turbine\faults\围带汽封.md | NO_VALID_DATA
+  data\power\thermal\steam_turbine\faults\联轴器.md | NO_VALID_DATA
+  data\power\thermal\空冷岛\faults\挡风墙／封檐板.md | NO_VALID_DATA
+
+--- SUMMARY ---
+Total fault files: 751
+Clean: 531
+With search_unavailable: 4
+With duplicate_header: 117
+With no_valid_data: 101
