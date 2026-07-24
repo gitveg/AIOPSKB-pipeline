@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-13T15:46:04.567111",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "离心泵",
+    "component": "延伸电缆"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

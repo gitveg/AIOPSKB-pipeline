@@ -1,0 +1,29 @@
+  ������ѯ DeepSeek ר�� (R1/1)...
+  DeepSeek ר��: 12,147 tokens
+  ������ѯ Kimi ר�� (R1/1)...
+  Kimi ר��: 22,263 tokens
+  ���󱨸��ѱ���: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\ai_expert_review\reviews\��ʽ���ı�_structure\���󱨸�.md
+评审层级: structure
+评审目标: 水泥 / 离心泵 / 卧式离心泵
+数据目录: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\data\cement\离心泵\卧式离心泵
+最大轮次: 1
+子系统: 6, 部件: 45
+  DeepSeek 专家 (deepseek-v4-pro) 会话已初始化
+  Kimi 专家 (kimi-k2.6) 会话已初始化
+
+已初始化 2 位专家会话。
+
+==================================================
+  R1/1 开始
+==================================================
+  DeepSeek 专家: score=6.5, verdict=需修订
+  Kimi 专家: score=7.3, verdict=需修订
+
+==================================================
+  评审完成
+==================================================
+  报告目录: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\ai_expert_review\reviews\卧式离心泵_structure
+  总 token: 34,410
+  轮次: 1
+    DeepSeek 专家: 12,147 tokens (1 calls)
+    Kimi 专家: 22,263 tokens (1 calls)

@@ -1,0 +1,27 @@
+
+── 转化统计 ──
+  sub_industries: 9
+  equipment: 386
+  sub_equipment: 46
+  components: 3152
+  faults: 8633
+  faults_with_details: 8563
+
+已输出: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\data\power\knowledge_base.json
+  总行数: 11470 (含故障: 9820)
+  XLSX: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\data\power\knowledge_base_v6.0.xlsx
+
+==================================================
+  Step 1/2: Markdown -> JSON
+==================================================
+
+==================================================
+  Step 2/2: JSON -> XLSX
+==================================================
+
+==================================================
+  瀵煎嚭瀹屾垚 v6.0
+==================================================
+  C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\data\power\knowledge_base_v6.0.xlsx
+  9.5 MB
+

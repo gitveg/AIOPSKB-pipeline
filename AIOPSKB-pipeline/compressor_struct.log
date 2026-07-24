@@ -1,0 +1,13 @@
+=== START 往复式压缩机 15:18:13 ===
+[15:47:48] [T1]   去重仲裁日志已保存: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\reports\petrochemical\phase3.2_dedup_压缩机_往复式压缩机.md
+[15:47:48] [T1] ===== 阶段3 完成 =====
+[15:47:48] [T1] 运行日志已保存: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\reports\petrochemical\runlog_20260716_154748.md
+=== START 离心压缩机 15:47:49 ===
+[16:19:36] [T1]   Phase 3.2 去重仲裁: 无跨子系统撞名，跳过
+[16:19:36] [T1] ===== 阶段3 完成 =====
+[16:19:36] [T1] 运行日志已保存: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\reports\petrochemical\runlog_20260716_161936.md
+=== START 液环压缩机 16:19:37 ===
+[16:54:09] [T1]   Phase 3.2 去重仲裁: 无跨子系统撞名，跳过
+[16:54:09] [T1] ===== 阶段3 完成 =====
+[16:54:09] [T1] 运行日志已保存: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\reports\petrochemical\runlog_20260716_165409.md
+=== COMPONENT DONE 16:54:10 ===

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-24T01:56:13.771996",
+  "context": {
+    "industry": "水泥",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "法兰"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

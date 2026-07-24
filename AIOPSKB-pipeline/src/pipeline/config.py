@@ -14,6 +14,11 @@ DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1"
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "DeepSeek-V4-Pro")
 DEEPSEEK_MODEL_FLASH = os.getenv("DEEPSEEK_MODEL_FLASH", "deepseek-v4-flash")
 
+# GLM (经 LiteLLM 代理) — 当前主力模型，替代 DeepSeek
+GLM_API_KEY = os.getenv("LITE_LLM_DEEPSEEK_API_KEY", "").strip('"')
+GLM_BASE_URL = os.getenv("LITE_LLM_BASE_URL", "").strip('"')
+GLM_MODEL = os.getenv("LITE_GLM_MODEL", "coder-glm-5.2").strip('"')
+
 KIMI_API_KEY = os.getenv("KIMI_API_KEY", "").strip('"')
 KIMI_BASE_URL = os.getenv("KIMI_BASE_URL", "https://api.moonshot.cn/v1")
 KIMI_MODEL = os.getenv("KIMI_MODEL", "kimi-k2.6")
@@ -22,15 +27,20 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "").strip('"')
 
 # Agent model assignments per construct_guide
 AGENT_MODELS = {
-    "main": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
-    "collector": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
-    "judge_b": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
-    "reviewer": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
-    "flash": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL_FLASH},
-    # Kimi as second expert for D5 standard verification (Phase C)
-    # Different training data from DeepSeek → complementary standard knowledge
-    "kimi_expert": {"api_key": KIMI_API_KEY, "base_url": KIMI_BASE_URL, "model": KIMI_MODEL},
+    "main": {"api_key": GLM_API_KEY, "base_url": GLM_BASE_URL, "model": GLM_MODEL},
+    "collector": {"api_key": GLM_API_KEY, "base_url": GLM_BASE_URL, "model": GLM_MODEL},
+    "judge_b": {"api_key": GLM_API_KEY, "base_url": GLM_BASE_URL, "model": GLM_MODEL},
+    "reviewer": {"api_key": GLM_API_KEY, "base_url": GLM_BASE_URL, "model": GLM_MODEL},
+    "flash": {"api_key": GLM_API_KEY, "base_url": GLM_BASE_URL, "model": GLM_MODEL},
+    # structure: Phase 3 结构生成（sub_system/component），DeepSeek 质量稳、token 少
+    "structure": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
+    # verifier: Phase C 标准核查（D5置信），异模型交叉验证 GLM 生成的故障
+    # 当前 ENABLE_PHASE_C=False 关闭；未来启用时模型选 Kimi/DeepSeek（Gemini 不可用，待定）
+    "verifier": {"api_key": DEEPSEEK_API_KEY, "base_url": DEEPSEEK_BASE_URL, "model": DEEPSEEK_MODEL},
 }
+
+# Phase C 标准核查开关（异模型对 D5 置信二次核查）。当前关闭省配额，未来启用设 True
+ENABLE_PHASE_C = False
 
 # Quality gates
 MIN_PASS_SCORE = 7
@@ -42,8 +52,17 @@ REPORTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'reports')
 
 # Industry codes
 INDUSTRY_CODES = {
-    "电力": "PW", "石化": "PE", "冶金": "MT", "水泥": "CM",
+    "电力": "PW", "石化": "PE", "冶金": "MT", "钢铁": "MT", "水泥": "CM",
     "煤炭": "CL", "轨道交通": "RT", "制造业": "MF", "航空航天与船舶": "AS",
+}
+
+# Sub-industry 2-char codes (改造7：编码位段扩展用)
+# 与 INDUSTRY_CODES 并列；子行业段在编码中按需出现（无子行业时省略该段）。
+# 中文子行业名 → 2字母代码；key 与 md_to_json.SUB_SLUGS 的 key 对齐。
+SUB_INDUSTRY_CODES = {
+    "火电": "TH", "水电": "HY", "风电": "WI", "光伏": "PV",
+    "核电": "NU", "燃气轮机": "GT", "抽水蓄能": "PS",
+    "输电": "TM", "变电": "SS", "配电": "DS", "储能": "ES",
 }
 
 # Sub-industry → classification coding anchor (used by Judge & Collector for cross-referencing)
@@ -283,3 +302,53 @@ def select_relevant_domains(comp_cn: str, equip_cn: str, search_text: str, max_n
     scored.sort(reverse=True)
     selected = [d for _, d in scored[:max_n]]
     return selected if selected else list(D5_STANDARD_REFERENCE.keys())[:max_n]
+
+
+# ── Failure categories (from static YAML whitelist) ──
+
+import yaml as _yaml
+
+_FAILURE_CATEGORIES_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'failure_categories.yaml')
+try:
+    with open(_FAILURE_CATEGORIES_PATH, 'r', encoding='utf-8') as _f:
+        FAILURE_CATEGORIES = _yaml.safe_load(_f)
+except FileNotFoundError:
+    FAILURE_CATEGORIES = {"groups": {"通用": {"keywords": [], "categories": ["性能退化", "异常振动", "泄漏"]}}}
+
+
+def select_failure_categories(comp_name: str, equip_name: str = "", search_text: str = "") -> tuple[list[str], str]:
+    """Select relevant fault category enum for a given component/part.
+
+    采用两层匹配：
+      1. 零件名（comp_name）优先且权威——故障类别描述的是"零件"的失效，
+         不应被"设备名"干扰（如齿轮箱里的轴承，其故障仍是轴承故障）。
+      2. 仅当零件名匹配不到任何分组时，才回退到 设备名+搜索文本 做上下文匹配。
+    关键词按长度加权：更长（更具体）的关键词权重更高，避免子串重叠误判
+    （如"石墨轴承"含"轴承"不应误判为滚动轴承）。
+    仍无匹配则使用"通用"分组。
+
+    Returns: (list_of_category_values, group_name)
+    """
+
+    def _best_group(text: str) -> tuple[str | None, int]:
+        best_score, best_group = 0, None
+        for group_name, group_info in FAILURE_CATEGORIES.get("groups", {}).items():
+            keywords = group_info.get("keywords", [])
+            score = sum(len(kw) for kw in keywords if kw.lower() in text)
+            if score > best_score:
+                best_score, best_group = score, group_name
+        return best_group, best_score
+
+    # 第一层：零件名匹配（权威）
+    best_group, best_score = _best_group(comp_name)
+
+    # 第二层：零件名无匹配时，回退到 设备名 + 搜索文本
+    if best_group is None:
+        ctx_text = f"{comp_name} {equip_name} {search_text[:3000]}"
+        best_group, _ = _best_group(ctx_text)
+
+    if best_group is None:
+        best_group = "通用"
+
+    categories = FAILURE_CATEGORIES["groups"][best_group].get("categories", [])
+    return categories, best_group

@@ -61,7 +61,7 @@ def parse_table(filepath):
             if not cells:
                 continue
             # 跳过表头行（含"名称"或"部件名称"等关键词）
-            if cells[0] in ("设备名称", "部件名称", "子行业名称", "子设备名称"):
+            if cells[0] in ("设备类型名称", "部件名称", "子行业名称", "子设备名称"):
                 continue
             rows.append(cells)
     return rows
@@ -79,7 +79,7 @@ def count_equipment(sub_dir):
 
 
 def count_components_and_faults(sub_dir):
-    """统计部件层和故障层信息。"""
+    """统计部件层和故障层信息。自动检测新旧格式。"""
     eq_dirs = []
     comp_done = 0
     comp_rows = 0
@@ -92,50 +92,168 @@ def count_components_and_faults(sub_dir):
             continue
         eq_dirs.append(item)
 
-        # 部件统计：设备级 components.md（无子设备时）
-        comp_path = os.path.join(item_path, "components.md")
-        if os.path.exists(comp_path):
-            rows = parse_table(comp_path)
-            if rows:
-                comp_done += 1
-                comp_rows += len(rows)
+        # 检测是否有子设备
+        sub_eq_names = []
+        sub_eq_path = os.path.join(item_path, "sub_equipment.md")
+        if os.path.exists(sub_eq_path):
+            se_rows = parse_table(sub_eq_path)
+            sub_eq_names = [r[0] for r in se_rows if r]
 
-        # 故障统计：设备级 faults/（无子设备时）
-        faults_dir = os.path.join(item_path, "faults")
-        if os.path.isdir(faults_dir):
-            fault_files = glob.glob(os.path.join(faults_dir, "*.md"))
+        if sub_eq_names:
+            # 有子设备：遍历子设备目录
+            for se_name in sub_eq_names:
+                se_dirname = se_name.replace("/", "／").replace("\\", "＼").strip()
+                se_dir = os.path.join(item_path, se_dirname)
+                if not os.path.isdir(se_dir):
+                    continue
+                if _is_new_format(se_dir):
+                    _count_new_format(se_dir, comp_done_ref=None,
+                                      stats=_StatsAccum())
+                else:
+                    _count_old_format(se_dir, comp_done_ref=None,
+                                      stats=_StatsAccum())
+        else:
+            # 无子设备
+            if _is_new_format(item_path):
+                _count_new_format(item_path, comp_done_ref=None,
+                                  stats=_StatsAccum())
+            else:
+                _count_old_format(item_path, comp_done_ref=None,
+                                  stats=_StatsAccum())
+
+    # Re-count with actual accumulation
+    comp_done = 0
+    comp_rows = 0
+    fault_done = 0
+    fault_rows = 0
+    stats = _StatsAccum()
+
+    for item in sorted(os.listdir(sub_dir)):
+        item_path = os.path.join(sub_dir, item)
+        if not os.path.isdir(item_path):
+            continue
+
+        sub_eq_names = []
+        sub_eq_path = os.path.join(item_path, "sub_equipment.md")
+        if os.path.exists(sub_eq_path):
+            se_rows = parse_table(sub_eq_path)
+            sub_eq_names = [r[0] for r in se_rows if r]
+
+        if sub_eq_names:
+            for se_name in sub_eq_names:
+                se_dirname = se_name.replace("/", "／").replace("\\", "＼").strip()
+                se_dir = os.path.join(item_path, se_dirname)
+                if not os.path.isdir(se_dir):
+                    continue
+                if _is_new_format(se_dir):
+                    _count_new_format(se_dir, None, stats)
+                else:
+                    _count_old_format(se_dir, None, stats)
+        else:
+            if _is_new_format(item_path):
+                _count_new_format(item_path, None, stats)
+            else:
+                _count_old_format(item_path, None, stats)
+
+    return len(eq_dirs), stats.comp_done, stats.comp_rows, stats.fault_done, stats.fault_rows
+
+
+class _StatsAccum:
+    """Simple accumulator for counts."""
+    def __init__(self):
+        self.comp_done = 0
+        self.comp_rows = 0
+        self.fault_done = 0
+        self.fault_rows = 0
+
+
+def _is_new_format(directory: str) -> bool:
+    """检测目录是否使用新的三层结构。"""
+    return os.path.exists(os.path.join(directory, "sub_system.md"))
+
+
+def _read_sub_systems(base_dir: str) -> list[str]:
+    """读取 sub_system.md，返回子系统名称列表。"""
+    ss_path = os.path.join(base_dir, "sub_system.md")
+    if not os.path.exists(ss_path):
+        return []
+    rows = parse_table(ss_path)
+    return [r[0] for r in rows if r]
+
+
+def _count_old_format(base_dir: str, comp_done_ref, stats: _StatsAccum):
+    """旧格式：统计 components.md 和 faults/。"""
+    comp_path = os.path.join(base_dir, "components.md")
+    if os.path.exists(comp_path):
+        rows = parse_table(comp_path)
+        if rows:
+            stats.comp_done += 1
+            stats.comp_rows += len(rows)
+
+    faults_dir = os.path.join(base_dir, "faults")
+    if os.path.isdir(faults_dir):
+        fault_files = glob.glob(os.path.join(faults_dir, "*.md"))
+        f_rows = 0
+        for ff in fault_files:
+            f_rows += len(parse_table(ff))
+        if f_rows > 0:
+            stats.fault_done += 1
+            stats.fault_rows += f_rows
+
+    # 子设备子目录（旧格式）
+    for sub_item in sorted(os.listdir(base_dir)):
+        sub_path = os.path.join(base_dir, sub_item)
+        if not os.path.isdir(sub_path):
+            continue
+        if sub_item in ("_archive", "faults", "kb_exports", "__pycache__"):
+            continue
+        if os.path.exists(os.path.join(sub_path, "components.md")):
+            sub_comp = os.path.join(sub_path, "components.md")
+            rows = parse_table(sub_comp)
+            if rows:
+                stats.comp_done += 1
+                stats.comp_rows += len(rows)
+        sub_faults = os.path.join(sub_path, "faults")
+        if os.path.isdir(sub_faults):
+            fault_files = glob.glob(os.path.join(sub_faults, "*.md"))
             f_rows = 0
             for ff in fault_files:
                 f_rows += len(parse_table(ff))
             if f_rows > 0:
-                fault_done += 1
-                fault_rows += f_rows
+                stats.fault_done += 1
+                stats.fault_rows += f_rows
 
-        # 子设备级统计：遍历子设备子目录
-        for sub_item in sorted(os.listdir(item_path)):
-            sub_path = os.path.join(item_path, sub_item)
+
+def _count_new_format(base_dir: str, comp_done_ref, stats: _StatsAccum):
+    """新格式：遍历子系统目录统计 components.md 和 faults/。"""
+    ss_names = _read_sub_systems(base_dir)
+    for ss_name in ss_names:
+        ss_dir = os.path.join(base_dir, ss_name)
+        if not os.path.isdir(ss_dir):
+            continue
+        comp_path = os.path.join(ss_dir, "components.md")
+        if os.path.exists(comp_path):
+            rows = parse_table(comp_path)
+            if rows:
+                stats.comp_done += 1
+                stats.comp_rows += len(rows)
+
+        # 遍历部件/零件目录下的 faults/
+        for sub_item in sorted(os.listdir(ss_dir)):
+            sub_path = os.path.join(ss_dir, sub_item)
             if not os.path.isdir(sub_path):
                 continue
-            if sub_item in ("_archive", "faults", "kb_exports"):
+            if sub_item in ("_archive", "kb_exports", "__pycache__"):
                 continue
-            # 检查是否为子设备目录（含 components.md 或 faults/）
-            sub_comp = os.path.join(sub_path, "components.md")
-            if os.path.exists(sub_comp):
-                rows = parse_table(sub_comp)
-                if rows:
-                    comp_done += 1
-                    comp_rows += len(rows)
-            sub_faults = os.path.join(sub_path, "faults")
-            if os.path.isdir(sub_faults):
-                fault_files = glob.glob(os.path.join(sub_faults, "*.md"))
+            faults_dir = os.path.join(sub_path, "faults")
+            if os.path.isdir(faults_dir):
+                fault_files = glob.glob(os.path.join(faults_dir, "*.md"))
                 f_rows = 0
                 for ff in fault_files:
                     f_rows += len(parse_table(ff))
                 if f_rows > 0:
-                    fault_done += 1
-                    fault_rows += f_rows
-
-    return len(eq_dirs), comp_done, comp_rows, fault_done, fault_rows
+                    stats.fault_done += 1
+                    stats.fault_rows += f_rows
 
 
 def stage2_status(total, main):

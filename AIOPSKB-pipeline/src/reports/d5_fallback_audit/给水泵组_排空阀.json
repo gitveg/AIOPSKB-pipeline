@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-02T15:48:43.272757",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "火电",
+    "equipment": "给水泵组",
+    "component": "排空阀"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

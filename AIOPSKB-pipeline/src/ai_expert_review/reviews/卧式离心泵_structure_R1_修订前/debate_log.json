@@ -1,0 +1,29 @@
+[
+  {
+    "round": 1,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 8867,
+    "completion_tokens": 4721,
+    "total_tokens": 13588,
+    "timestamp": "2026-07-17T15:52:45.722556"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 8626,
+    "completion_tokens": 8192,
+    "total_tokens": 16818,
+    "timestamp": "2026-07-17T15:57:23.617937"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 9798,
+    "completion_tokens": 4698,
+    "total_tokens": 14496,
+    "timestamp": "2026-07-17T16:00:12.835759"
+  }
+]

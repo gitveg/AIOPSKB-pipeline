@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-22T14:39:01.923604",
+  "context": {
+    "industry": "钢铁",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "后端墙板"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

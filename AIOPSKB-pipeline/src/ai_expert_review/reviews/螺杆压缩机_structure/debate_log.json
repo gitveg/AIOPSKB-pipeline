@@ -1,0 +1,38 @@
+[
+  {
+    "round": 1,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 7583,
+    "completion_tokens": 2344,
+    "total_tokens": 9927,
+    "timestamp": "2026-07-16T17:01:38.396439"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 7447,
+    "completion_tokens": 7124,
+    "total_tokens": 14571,
+    "timestamp": "2026-07-16T17:08:53.698031"
+  },
+  {
+    "round": 2,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 18955,
+    "completion_tokens": 5273,
+    "total_tokens": 24228,
+    "timestamp": "2026-07-16T17:10:22.924730"
+  },
+  {
+    "round": 2,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 18600,
+    "completion_tokens": 6402,
+    "total_tokens": 25002,
+    "timestamp": "2026-07-16T17:15:45.014408"
+  }
+]

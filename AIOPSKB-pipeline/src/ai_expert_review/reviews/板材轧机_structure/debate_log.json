@@ -1,0 +1,20 @@
+[
+  {
+    "round": 1,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 17118,
+    "completion_tokens": 6627,
+    "total_tokens": 23745,
+    "timestamp": "2026-07-21T16:30:11.835871"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 16916,
+    "completion_tokens": 12428,
+    "total_tokens": 29344,
+    "timestamp": "2026-07-21T16:36:11.120644"
+  }
+]

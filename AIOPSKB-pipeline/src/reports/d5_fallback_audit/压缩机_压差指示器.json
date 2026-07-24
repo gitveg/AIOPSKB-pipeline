@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-17T02:11:27.976269",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "压缩机",
+    "component": "压差指示器"
+  },
+  "residual_pending": 2,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

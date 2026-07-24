@@ -1,0 +1,27 @@
+加载设备清单：共 71 台，冻结 9 台，待合并 62 台
+
+==================================================
+  R1/2 开始
+==================================================
+  正在咨询 DeepSeek 专家 (R1/2)...
+  正在咨询 DeepSeek 专家...
+  DeepSeek 专家 R1/2: verdict=通过 score=8.5 大设备=17 独立=3 删除=2 存疑=3
+  正在咨询 Kimi 专家 (R1/2)...
+  正在咨询 Kimi 专家...
+  Kimi 专家 R1/2 调用失败: HTTPSConnectionPool(host='api.moonshot.cn', port=443): Read timed out. (read timeout=300)
+
+==================================================
+  R2/2 开始
+==================================================
+  正在咨询 DeepSeek 专家 (R2/2)...
+  正在咨询 DeepSeek 专家...
+  DeepSeek 专家 R2/2: verdict=通过 score=8.5 大设备=17 独立=5 删除=2 存疑=1
+  正在咨询 Kimi 专家 (R2/2)...
+  正在咨询 Kimi 专家...
+  Kimi 专家 R2/2: verdict=通过（修订） score=8.8 大设备=18 独立=9 删除=0 存疑=3
+
+完成。归档目录: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\ai_expert_review\reviews\thermal_equipment_merge
+  DeepSeek 专家 (deepseek-v4-pro) 会话已初始化
+  Kimi 专家 (kimi-k2.6) 会话已初始化
+
+已初始化 2 位专家会话。

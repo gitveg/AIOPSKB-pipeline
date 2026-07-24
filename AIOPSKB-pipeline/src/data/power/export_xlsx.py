@@ -16,7 +16,7 @@ import subprocess
 import sys
 
 # ── 版本号（在此手动修改）──
-VERSION = "5.5"
+VERSION = "6.5"
 
 # ── 路径 ──
 POWER_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-22T15:59:50.767936",
+  "context": {
+    "industry": "钢铁",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "中间继电器"
+  },
+  "residual_pending": 3,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-21T23:57:22.322361",
+  "context": {
+    "industry": "钢铁",
+    "sub_industry": "",
+    "equipment": "轧机",
+    "component": "电气插头"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

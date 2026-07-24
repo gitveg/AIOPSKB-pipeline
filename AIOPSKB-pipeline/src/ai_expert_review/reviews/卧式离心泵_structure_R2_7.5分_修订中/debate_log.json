@@ -1,0 +1,56 @@
+[
+  {
+    "round": 1,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 9091,
+    "completion_tokens": 4176,
+    "total_tokens": 13267,
+    "timestamp": "2026-07-20T01:37:40.003971"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 8847,
+    "completion_tokens": 8192,
+    "total_tokens": 17039,
+    "timestamp": "2026-07-20T01:39:22.880003"
+  },
+  {
+    "round": 2,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 18766,
+    "completion_tokens": 1486,
+    "total_tokens": 20252,
+    "timestamp": "2026-07-20T01:39:46.227052"
+  },
+  {
+    "round": 2,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "timestamp": "2026-07-20T01:39:46.710687"
+  },
+  {
+    "round": 3,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 28456,
+    "completion_tokens": 647,
+    "total_tokens": 29103,
+    "timestamp": "2026-07-20T01:39:54.640644"
+  },
+  {
+    "round": 3,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "timestamp": "2026-07-20T01:39:55.153028"
+  }
+]

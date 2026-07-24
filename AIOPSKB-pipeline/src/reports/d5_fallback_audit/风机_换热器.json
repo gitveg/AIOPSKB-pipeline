@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-22T15:13:50.161640",
+  "context": {
+    "industry": "钢铁",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "换热器"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

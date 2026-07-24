@@ -1,0 +1,47 @@
+[
+  {
+    "round": 1,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 8707,
+    "completion_tokens": 6014,
+    "total_tokens": 14721,
+    "timestamp": "2026-07-16T17:43:38.222382"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 8511,
+    "completion_tokens": 8192,
+    "total_tokens": 16703,
+    "timestamp": "2026-07-16T17:48:46.065156"
+  },
+  {
+    "round": 1,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 9849,
+    "completion_tokens": 5084,
+    "total_tokens": 14933,
+    "timestamp": "2026-07-16T17:52:01.446706"
+  },
+  {
+    "round": 2,
+    "expert": "deepseek",
+    "model": "deepseek-v4-pro",
+    "prompt_tokens": 19479,
+    "completion_tokens": 2975,
+    "total_tokens": 22454,
+    "timestamp": "2026-07-16T17:52:47.270936"
+  },
+  {
+    "round": 2,
+    "expert": "kimi",
+    "model": "kimi-k2.6",
+    "prompt_tokens": 20031,
+    "completion_tokens": 6034,
+    "total_tokens": 26065,
+    "timestamp": "2026-07-16T17:56:20.783599"
+  }
+]

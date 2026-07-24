@@ -1,0 +1,29 @@
+  ������ѯ DeepSeek ר�� (R1/1)...
+  DeepSeek ר��: 12,786 tokens
+  ������ѯ Kimi ר�� (R1/1)...
+  Kimi ר��: 18,595 tokens
+  ���󱨸��ѱ���: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\ai_expert_review\reviews\��תҤ_structure\���󱨸�.md
+评审层级: structure
+评审目标: 水泥 / 回转窑 / 回转窑
+数据目录: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\pipeline\..\data\cement\回转窑
+最大轮次: 1
+子系统: 7, 部件: 37
+  DeepSeek 专家 (deepseek-v4-pro) 会话已初始化
+  Kimi 专家 (kimi-k2.6) 会话已初始化
+
+已初始化 2 位专家会话。
+
+==================================================
+  R1/1 开始
+==================================================
+  DeepSeek 专家: score=8.5, verdict=通过
+  Kimi 专家: score=6.8, verdict=需修订
+
+==================================================
+  评审完成
+==================================================
+  报告目录: C:\Users\900009684\Desktop\AIOpsKB\AIOPSKB-pipeline\src\ai_expert_review\reviews\回转窑_structure
+  总 token: 31,381
+  轮次: 1
+    DeepSeek 专家: 12,786 tokens (1 calls)
+    Kimi 专家: 18,595 tokens (1 calls)

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-13T16:17:13.821348",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "离心泵",
+    "component": "最小流量再循环阀"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

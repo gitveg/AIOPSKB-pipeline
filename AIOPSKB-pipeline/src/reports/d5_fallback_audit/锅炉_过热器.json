@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-06-29T11:10:13.703174",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "火电",
+    "equipment": "锅炉",
+    "component": "过热器"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

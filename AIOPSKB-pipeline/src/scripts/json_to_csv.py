@@ -14,15 +14,20 @@ import os
 import sys
 
 COLUMNS = [
-    "行业", "子行业", "设备名称", "设备类型", "设备描述", "子设备",
-    "部件名称", "父部件", "部件描述", "易损标识", "维护方法", "报废方法",
+    "编码",
+    "行业", "子行业", "设备类型名称", "设备属性", "设备描述", "子设备",
+    "子系统", "部件名称", "零件", "部件描述", "易损标识", "维护方法", "报废方法",
     "故障名称",
-    "D1_故障类别", "D2_故障等级", "D3_故障描述与机理",
+    "故障类别", "D1_物理属性", "D2_故障等级", "D3_故障描述与机理",
     "D4_故障征兆", "D5_故障特征参数", "D6_监测与检测手段",
     "D7_诊断方法", "D8_检修方法", "D9_预防措施", "D10_易混淆故障",
+    "D11_用工需求", "D12_工机具", "D13_备件用料", "D14_安全注意事项", "D15_验收标准",  # 改造6新增检维修5列（D11-D15）
 ]
 
-FAULT_DIMS = [c for c in COLUMNS if c.startswith("D")]
+# D1-D10 诊断维度（排除 D11-D15 检维修列，后者由 FAULT_MAINT_DIMS 单独承载）
+FAULT_DIMS = [c for c in COLUMNS if c.startswith("D") and not c.startswith(("D11_", "D12_", "D13_", "D14_", "D15_"))]
+# 改造6新增：检维修5列（不以D开头，单独定义为故障附加维度）
+FAULT_MAINT_DIMS = ["D11_用工需求", "D12_工机具", "D13_备件用料", "D14_安全注意事项", "D15_验收标准"]
 
 
 def flatten(data: dict) -> list[dict]:
@@ -41,63 +46,105 @@ def flatten(data: dict) -> list[dict]:
     return rows
 
 
-def _flatten_component(rows, industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str, comp):
+def _flatten_component(rows, industry, sub_name, eq_name, eq_type, eq_desc,
+                       sub_eq_str, comp, sub_system_name=""):
+    """展平单个部件（旧格式）或新格式的部件+零件。"""
     comp_name = comp.get("name", "")
-    comp_parent = comp.get("parent", "")
+    comp_parent = comp.get("parent", "")  # 旧格式
     comp_desc = comp.get("description", "")
     comp_consumable = "是" if comp.get("is_consumable") else "否"
     comp_maint = comp.get("维护方法", "") or ""
     comp_disposal = comp.get("报废方法", "") or ""
 
+    # 新格式：部件有 parts 列表和自己的 faults
+    parts = comp.get("parts", [])
+
+    # 部件级故障（新格式中总成级故障，或旧格式的全部故障）
     faults = comp.get("faults", [])
     if faults:
         for fault in faults:
-            row = {
-                "行业": industry,
-                "子行业": sub_name,
-                "设备名称": eq_name,
-                "设备类型": eq_type,
-                "设备描述": eq_desc,
-                "子设备": sub_eq_str,
-                "部件名称": comp_name,
-                "父部件": comp_parent,
-                "部件描述": comp_desc,
-                "易损标识": comp_consumable,
-                "维护方法": comp_maint,
-                "报废方法": comp_disposal,
-                "故障名称": fault.get("故障名称", "") or "",
-            }
-            for dim in FAULT_DIMS:
-                row[dim] = fault.get(dim, "") or ""
+            row = _build_row(industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str,
+                             sub_system_name, comp_name, "", comp_desc, comp_consumable,
+                             comp_maint, comp_disposal, fault, fault.get("编码", ""))
             rows.append(row)
+    elif not parts:
+        # 旧格式无故障时输出一行
+        rows.append(_build_row(industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str,
+                               sub_system_name, comp_name, comp_parent, comp_desc, comp_consumable,
+                               comp_maint, comp_disposal, None, comp.get("编码", "")))
+
+    # 零件级（新格式）
+    for part in parts:
+        part_name = part.get("name", "")
+        part_desc = part.get("description", "")
+        part_consumable = "是" if part.get("is_consumable") else "否"
+        part_faults = part.get("faults", [])
+        if part_faults:
+            for fault in part_faults:
+                row = _build_row(industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str,
+                                 sub_system_name, comp_name, part_name, part_desc, part_consumable,
+                                 "—", "—", fault, fault.get("编码", ""))
+                rows.append(row)
+        else:
+            rows.append(_build_row(industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str,
+                                   sub_system_name, comp_name, part_name, part_desc, part_consumable,
+                                   "—", "—", None, part.get("编码", "")))
+
+
+def _build_row(industry, sub_name, eq_name, eq_type, eq_desc, sub_eq_str,
+               sub_system_name, comp_name, part_name, comp_desc, comp_consumable,
+               comp_maint, comp_disposal, fault, code=""):
+    """构建单行数据字典。code 为该行的段式编码（改造7）：故障行取故障码，结构行取部件/零件码。"""
+    row = {
+        "编码": code,
+        "行业": industry,
+        "子行业": sub_name,
+        "设备类型名称": eq_name,
+        "设备属性": eq_type,
+        "设备描述": eq_desc,
+        "子设备": sub_eq_str,
+        "子系统": sub_system_name,
+        "部件名称": comp_name,
+        "零件": part_name,
+        "部件描述": comp_desc,
+        "易损标识": comp_consumable,
+        "维护方法": comp_maint,
+        "报废方法": comp_disposal,
+        "故障名称": fault.get("故障名称", "") if fault else "",
+    }
+    all_fault_dims = FAULT_DIMS + FAULT_MAINT_DIMS
+    # 故障类别（改造5）：COLUMNS 中独立列、不属于 D 维度，单独从 fault 取值，否则拍平时会被丢弃
+    row["故障类别"] = (fault.get("故障类别", "") or "") if fault else ""
+    if fault:
+        for dim in all_fault_dims:
+            row[dim] = fault.get(dim, "") or ""
     else:
-        rows.append({
-            "行业": industry,
-            "子行业": sub_name,
-            "设备名称": eq_name,
-            "设备类型": eq_type,
-            "设备描述": eq_desc,
-            "子设备": sub_eq_str,
-            "部件名称": comp_name,
-            "父部件": comp_parent,
-            "部件描述": comp_desc,
-            "易损标识": comp_consumable,
-            "维护方法": comp_maint,
-            "报废方法": comp_disposal,
-            "故障名称": "",
-            **{dim: "" for dim in FAULT_DIMS},
-        })
+        for dim in all_fault_dims:
+            row[dim] = ""
+    return row
 
 
 def _flatten_equipment(rows, industry, sub_name, eq):
     eq_name = eq.get("name", "")
-    eq_type = eq.get("type", "")
+    eq_type = eq.get("attribute", "")
     eq_desc = eq.get("description", "")
 
     # 子设备元数据（用于无 components 时的 fallback 显示）
     sub_eqs = eq.get("sub_equipment", [])
     sub_eq_str = "；".join(s.get("name", "") for s in sub_eqs) if sub_eqs else ""
 
+    # 新格式：sub_systems 优先
+    sub_systems = eq.get("sub_systems", [])
+    if sub_systems:
+        for ss in sub_systems:
+            ss_name = ss.get("name", "")
+            ss_sub_eq = ss.get("sub_equipment", "")
+            for comp in ss.get("components", []):
+                _flatten_component(rows, industry, sub_name, eq_name, eq_type, eq_desc,
+                                   ss_sub_eq or sub_eq_str, comp, sub_system_name=ss_name)
+        return
+
+    # 旧格式：components
     components = eq.get("components", [])
     if components:
         for comp in components:
@@ -107,20 +154,22 @@ def _flatten_equipment(rows, industry, sub_name, eq):
                                specific_se or sub_eq_str, comp)
     else:
         rows.append({
+            "编码": "",
             "行业": industry,
             "子行业": sub_name,
-            "设备名称": eq_name,
-            "设备类型": eq_type,
+            "设备类型名称": eq_name,
+            "设备属性": eq_type,
             "设备描述": eq_desc,
             "子设备": sub_eq_str,
+            "子系统": "",
             "部件名称": "",
-            "父部件": "",
+            "零件": "",
             "部件描述": "",
             "易损标识": "",
             "维护方法": "",
             "报废方法": "",
             "故障名称": "",
-            **{dim: "" for dim in FAULT_DIMS},
+            **{dim: "" for dim in FAULT_DIMS + FAULT_MAINT_DIMS},
         })
 
 
@@ -129,6 +178,46 @@ def write_csv(rows: list[dict], csv_path: str):
         writer = csv.DictWriter(f, fieldnames=COLUMNS)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _verify_xlsx(rows: list[dict], xlsx_path: str):
+    """自检：读回刚写的 xlsx，逐列对比非空行数与输入 rows。
+    捕获"拍平时字段遗漏/数据丢失"类 bug（如故障类别孤儿列）：
+    JSON 有值但 xlsx 全空 → 自检报错，导出失败，而非静默产出残缺文件。"""
+    from openpyxl import load_workbook
+    wb = load_workbook(xlsx_path, read_only=True)
+    ws = wb["故障知识库"]
+    headers = list(next(ws.iter_rows(min_row=1, max_row=1, values_only=True)))
+    col_idx = {h: i for i, h in enumerate(headers)}
+    xlsx_rows = list(ws.iter_rows(min_row=2, values_only=True))
+    wb.close()
+
+    check_cols = ["故障名称", "故障类别"] + FAULT_DIMS + FAULT_MAINT_DIMS
+    problems = []
+    if len(xlsx_rows) != len(rows):
+        problems.append(f"总行数不一致: xlsx={len(xlsx_rows)} vs 输入={len(rows)}")
+    for col in check_cols:
+        if col not in col_idx:
+            problems.append(f"xlsx 缺少列[{col}]（表头: {headers}）")
+            continue
+        ci = col_idx[col]
+        xn = sum(1 for r in xlsx_rows if r[ci])
+        rn = sum(1 for r in rows if r.get(col))
+        if xn != rn:
+            problems.append(f"列[{col}]非空数不一致: xlsx={xn} vs 输入={rn}")
+
+    if problems:
+        raise RuntimeError(
+            "❌ 导出自检失败（xlsx 与输入数据不一致，可能字段遗漏/数据丢失）:\n  "
+            + "\n  ".join(problems)
+        )
+
+    print(f"  ✓ 导出自检通过: {len(rows)} 行，关键列非空数:", file=sys.stderr)
+    for col in ["故障名称", "故障类别", "D1_物理属性",
+                "D5_故障特征参数", "D8_检修方法", "D11_用工需求", "D15_验收标准"]:
+        if col in col_idx:
+            n = sum(1 for r in xlsx_rows if r[col_idx[col]])
+            print(f"      {col}: {n}", file=sys.stderr)
 
 
 def write_xlsx(rows: list[dict], xlsx_path: str):
@@ -169,7 +258,7 @@ def write_xlsx(rows: list[dict], xlsx_path: str):
 
     # Column widths
     col_widths = {
-        "行业": 8, "子行业": 10, "设备名称": 18, "设备类型": 10, "设备描述": 25,
+        "编码": 26, "行业": 8, "子行业": 10, "设备类型名称": 18, "设备属性": 10, "设备描述": 25,
         "子设备": 20,
         "部件名称": 18, "父部件": 12, "部件描述": 20, "易损标识": 8,
         "故障名称": 22,
@@ -190,7 +279,7 @@ def write_xlsx(rows: list[dict], xlsx_path: str):
     sub_stats = {}
     for r in rows:
         sub = r.get("子行业", "(无子行业)")
-        eq = r.get("设备名称", "")
+        eq = r.get("设备类型名称", "")
         has_fault = bool(r.get("故障名称"))
         if sub not in sub_stats:
             sub_stats[sub] = {"设备": set(), "部件": 0, "故障": 0}
@@ -219,6 +308,7 @@ def write_xlsx(rows: list[dict], xlsx_path: str):
     ws2.freeze_panes = "A2"
 
     wb.save(xlsx_path)
+    _verify_xlsx(rows, xlsx_path)
 
 
 def main():

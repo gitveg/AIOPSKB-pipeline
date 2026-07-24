@@ -1,12 +1,13 @@
 """
 标准核查 Agent（Standard Checker）
 
-使用 Kimi 作为第二专家，在 DeepSeek 生成故障知识后对 D5 置信标注做二次审核：
+使用异模型（verifier）作为第二专家，对生成模型产出的故障知识 D5 置信标注做二次审核：
 - 消除所有"待核实"条目（升级为"标准值"或降级为"经验值"）
-- 尝试将"经验值"升级为"标准值"（当 Kimi 知道对应标准时）
-- 验证声称"标准值"的参数是否真实引用了正确标准（防止 DeepSeek 幻觉）
+- 尝试将"经验值"升级为"标准值"（当核查模型知道对应标准时）
+- 验证声称"标准值"的参数是否真实引用了正确标准（防止生成模型幻觉）
 
 触发时机：fault 层整合（Phase B）完成后，写盘前（Phase C）。
+受 config.ENABLE_PHASE_C 开关控制（当前关闭，未来启用时 verifier 即生效）。
 """
 
 import json
@@ -18,7 +19,7 @@ STANDARD_CHECKER_SYSTEM = """你是一位精通国内外工业设备技术标准
 你的任务是核查故障特征参数（D5字段）的置信标注，核查目标：
 1. 对所有"待核实"条目给出结论（升级为"标准值"、降级为"经验值"、或标记为"unknown"）
 2. 尝试将"经验值"升级为"标准值"（当你确实知道对应标准时）
-3. 验证声称"标准值"的参数是否真实引用了正确标准（防止 DeepSeek 幻觉）
+3. 验证声称"标准值"的参数是否真实引用了正确标准（防止生成模型幻觉）
 
 工作原则：
 - 宁可标"经验值"也绝不保留虚假标准号
@@ -29,7 +30,7 @@ STANDARD_CHECKER_SYSTEM = """你是一位精通国内外工业设备技术标准
 
 输出必须是合法JSON，不要在前后添加任何其他文字。"""
 
-# Build full standard reference for Kimi prompt (all 18 domains)
+# Build full standard reference for 核查 prompt (all 18 domains)
 def _build_checker_reference() -> str:
     from config import D5_STANDARD_REFERENCE
     lines = []
@@ -54,7 +55,7 @@ STANDARD_CHECKER_PROMPT = """请核查以下【{ctx_str}】部件故障知识表
   "fault_updates": [
     {{
       "fault_name": "故障名称（与表格第一列完全一致）",
-      "d5_revised": "修改后的完整D5单元格内容（保留所有参数条目，用<br>分隔，仅修改置信标注部分）",
+      "d5_revised": "修改后的完整D5单元格内容（保留所有参数条目，用<br>分隔，替换原置信标注：必须先删除该参数原有的'置信：X'再写新值，禁止保留旧置信导致同一参数出现两个置信）",
       "changes": [
         {{
           "param_hint": "参数关键词（3-5字）",
@@ -142,7 +143,7 @@ def _apply_fault_d5_updates(fault_content: str, fault_updates: list[dict]) -> tu
 
 
 def run_standard_checker(context: dict, fault_content: str) -> tuple[str, dict]:
-    """Use Kimi to verify and upgrade D5 confidence annotations.
+    """Use verifier (异模型) to verify and upgrade D5 confidence annotations.
 
     Returns:
         (updated_fault_content, stats_dict)
@@ -159,7 +160,7 @@ def run_standard_checker(context: dict, fault_content: str) -> tuple[str, dict]:
         fault_content=fault_content,
     )
 
-    raw = call_llm("main", STANDARD_CHECKER_SYSTEM, prompt, temperature=0.1)
+    raw = call_llm("verifier", STANDARD_CHECKER_SYSTEM, prompt, temperature=0.1)
     cleaned = re.sub(r'```json\s*|```\s*', '', raw).strip()
 
     try:
@@ -168,7 +169,7 @@ def run_standard_checker(context: dict, fault_content: str) -> tuple[str, dict]:
         return fault_content, {
             "status": "parse_error",
             "applied": 0,
-            "summary": "Kimi响应解析失败，跳过标准核查",
+            "summary": "核查响应解析失败，跳过标准核查",
         }
 
     fault_updates = result.get("fault_updates", [])

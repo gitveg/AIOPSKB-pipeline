@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-06-23T23:59:07.268432",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "风电",
+    "equipment": "风电机组",
+    "component": "防雷模块"
+  },
+  "residual_pending": 0,
+  "kimi_unknown": 2,
+  "fallback_label": "经验值-未核实"
+}

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-21T18:48:33.986452",
+  "context": {
+    "industry": "钢铁",
+    "sub_industry": "",
+    "equipment": "轧机",
+    "component": "螺母"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

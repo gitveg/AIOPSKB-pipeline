@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-14T15:04:47.056278",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "离心泵",
+    "component": "泵体"
+  },
+  "residual_pending": 2,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

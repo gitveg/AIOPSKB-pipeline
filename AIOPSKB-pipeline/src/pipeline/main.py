@@ -25,13 +25,15 @@ def main():
                         help="限定设备名 (如: 锅炉)。仅 component/fault 阶段有效")
     parser.add_argument("--equip-type", "-t", default=None,
                         choices=["主设备", "辅助设备", "公用系统"],
-                        help="按设备类型筛选 (主设备/辅助设备/公用系统)。仅 component/fault 阶段有效")
+                        help="按设备属性筛选 (主设备/辅助设备/公用系统)。仅 component/fault 阶段有效")
     parser.add_argument("--workers", "-w", type=int, default=1,
                         help="并行工作线程数 (默认1=串行，推荐3-5)")
     parser.add_argument("--force", "-f", action="store_true",
                         help="强制重跑，覆盖已有数据（默认跳过已有数据的条目）")
     parser.add_argument("--comp", "-c", default=None,
                         help="限定部件名 (如: 水冷壁)。仅 fault 阶段有效")
+    parser.add_argument("--sub-equip", default=None,
+                        help="限定子设备名 (如: 半直驱（中速永磁）风电机组)。仅 component/fault 阶段有效")
 
     args = parser.parse_args()
 
@@ -51,11 +53,13 @@ def main():
         orchestrator.run_equipment(sub_filter=args.sub)
     elif args.phase == "component":
         orchestrator.run_component(sub_filter=args.sub, equip_filter=args.equip,
-                                   equip_type=args.equip_type)
+                                   equip_type=args.equip_type,
+                                   sub_eq_filter=args.sub_equip)
     elif args.phase == "fault":
         orchestrator.run_fault(sub_filter=args.sub, equip_filter=args.equip,
                                comp_filter=args.comp, equip_type=args.equip_type,
-                               force=args.force, workers=args.workers)
+                               force=args.force, workers=args.workers,
+                               sub_eq_filter=args.sub_equip)
     elif args.phase == "validate":
         orchestrator.run_validate(sub_filter=args.sub)
 

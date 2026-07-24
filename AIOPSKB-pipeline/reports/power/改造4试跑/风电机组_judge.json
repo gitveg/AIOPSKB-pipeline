@@ -1,0 +1,11 @@
+{
+  "verdict": "pass",
+  "score": 9,
+  "missing_items": [],
+  "classification_issues": [],
+  "issues": [],
+  "suggestions": [
+    "当前三类主流技术路线（双馈、直驱、半直驱）已覆盖绝大部分在运及新增机组，分类互斥且无功能模块混杂，命名规范"
+  ],
+  "critical_issues": []
+}

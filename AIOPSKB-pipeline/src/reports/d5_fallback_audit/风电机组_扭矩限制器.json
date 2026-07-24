@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-06-18T19:50:50.848675",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "风电",
+    "equipment": "风电机组",
+    "component": "扭矩限制器"
+  },
+  "residual_pending": 0,
+  "kimi_unknown": 1,
+  "fallback_label": "经验值-未核实"
+}

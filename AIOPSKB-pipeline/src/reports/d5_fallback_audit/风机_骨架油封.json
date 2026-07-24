@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-16T03:21:01.063505",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "骨架油封"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

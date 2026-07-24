@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-06-30T13:47:06.741205",
+  "context": {
+    "industry": "电力",
+    "sub_industry": "火电",
+    "equipment": "锅炉",
+    "component": "灰库气化风机"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-07-15T21:36:25.053687",
+  "context": {
+    "industry": "石化",
+    "sub_industry": "",
+    "equipment": "风机",
+    "component": "出风口"
+  },
+  "residual_pending": 1,
+  "kimi_unknown": 0,
+  "fallback_label": "经验值-未核实"
+}

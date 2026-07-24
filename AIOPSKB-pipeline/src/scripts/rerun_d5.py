@@ -177,7 +177,7 @@ def apply_d5_updates(content: str, updates: dict[str, str], d5_col_idx: int) -> 
             continue
 
         # Skip header row (contains column title keywords)
-        if any(c.strip() in ("故障名称", "D1 故障类别", "D2 故障等级", "D3 故障描述与机理",
+        if any(c.strip() in ("故障名称", "D1 物理属性", "故障类别", "D1 故障类别", "D2 故障等级", "D3 故障描述与机理",
                               "D4 故障征兆", "D5 故障特征参数", "D6 监测与检测手段",
                               "D7 诊断方法", "D8 检修方法", "D9 预防措施",
                               "D10 易混淆故障") for c in cells):
@@ -200,38 +200,70 @@ def apply_d5_updates(content: str, updates: dict[str, str], d5_col_idx: int) -> 
 def extract_context(filepath: str) -> dict:
     """Derive context dict from file path.
 
-    Supports two directory layouts patterns:
-    1. Flat: data/power/wind/箱式变压器/faults/分接开关.md
+    Supports three directory layout patterns:
+    1. Flat (old): data/power/wind/箱式变压器/faults/分接开关.md
        → {"industry": "电力", "sub_industry": "风电", "equipment": "箱式变压器", "component": "分接开关"}
-    2. Sub-equipment: data/power/thermal/boiler/煤粉锅炉/faults/水冷壁.md
+    2. Sub-equipment (old): data/power/thermal/boiler/煤粉锅炉/faults/水冷壁.md
        → {"industry": "电力", "sub_industry": "火电", "equipment": "锅炉", "sub_equipment": "煤粉锅炉", "component": "水冷壁"}
+    3. New format (sub-system): data/power/wind/风电机组/双馈风电机组/传动系统/齿轮箱/faults/齿轮箱.md
+       → {"industry": "电力", "sub_industry": "风电", "equipment": "风电机组", "sub_equipment": "双馈风电机组",
+          "sub_system": "传动系统", "component": "齿轮箱"}
     """
     parts = filepath.replace("\\", "/").split("/")
-    equipment = comp = sub_equipment = ""
+    equipment = comp = sub_equipment = sub_system = ""
     for i, p in enumerate(parts):
         if p == "faults" and i > 0:
-            parent_dir = parts[i - 1]
-            grandparent_dir = parts[i - 2] if i >= 2 else ""
+            parent_dir = parts[i - 1]  # component or part directory
+            comp = os.path.splitext(parts[i + 1])[0] if i + 1 < len(parts) else ""
 
-            # Check if grandparent has sub_equipment.md → parent is a sub-equipment directory
+            # Walk upward to identify structure
+            # Check grandparent for sub_system.md → new format
             if i >= 2:
                 gp_path_parts = parts[:i - 1]
                 gp_path = os.path.join(*gp_path_parts) if len(gp_path_parts) > 1 else gp_path_parts[0]
-                if os.path.exists(os.path.join(gp_path, "sub_equipment.md")):
+                if os.path.exists(os.path.join(gp_path, "sub_system.md")):
+                    # New format: grandparent is sub-system dir, great-grandparent is base dir
+                    sub_system = parent_dir
+                    if i >= 3:
+                        ggp_path_parts = parts[:i - 2]
+                        ggp_path = os.path.join(*ggp_path_parts) if len(ggp_path_parts) > 1 else ggp_path_parts[0]
+                        if os.path.exists(os.path.join(ggp_path, "sub_equipment.md")):
+                            sub_equipment = parts[i - 2]
+                            if i >= 4:
+                                equipment = parts[i - 3]
+                        else:
+                            equipment = parts[i - 2]
+                elif os.path.exists(os.path.join(gp_path, "sub_equipment.md")):
+                    # Old format with sub-equipment
                     sub_equipment = parent_dir
-                    equipment = grandparent_dir
+                    if i >= 3:
+                        equipment = parts[i - 2]
                 else:
                     equipment = parent_dir
             else:
                 equipment = parent_dir
 
-            comp = os.path.splitext(parts[i + 1])[0] if i + 1 < len(parts) else ""
             break
+
+    # Infer sub_industry from path (power/thermal → 火电, etc.)
+    sub_industry = ""
+    for j, p in enumerate(parts):
+        if p == "power":
+            if j + 1 < len(parts):
+                sub_slug = parts[j + 1]
+                _SUB_SLUGS = {"thermal": "火电", "hydro": "水电", "wind": "风电",
+                              "nuclear": "核电", "pv": "光伏", "transmission": "输电",
+                              "substation": "变电", "distribution": "配电",
+                              "energy_storage": "储能"}
+                sub_industry = _SUB_SLUGS.get(sub_slug, "")
+            break
+
     return {
         "industry": "电力",
-        "sub_industry": "风电",
+        "sub_industry": sub_industry,
         "equipment": equipment,
         "sub_equipment": sub_equipment,
+        "sub_system": sub_system,
         "component": comp,
     }
 
